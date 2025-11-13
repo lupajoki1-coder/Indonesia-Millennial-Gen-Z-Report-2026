@@ -12,10 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script>
-  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-</script>
-<script defer src="/_vercel/insights/script.js"></script>    
+    
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
@@ -642,9 +639,9 @@
         <div id="modal-backdrop" class="modal-close-trigger fixed inset-0 bg-black/70 backdrop-blur-sm"></div>
         
         <!-- Content -->
-        <div class="modal-content-wrapper relative w-full max-w-3xl max-h-[90vh] flex">
+        <div class="modal-content-wrapper relative w-full max-w-3xl max-h-[90vh] flex flex-col">
             <!-- Kartu modal sekarang juga memiliki efek kaca -->
-            <div class="deep-card-flat glass-effect flex flex-col h-full w-full">
+            <div class="deep-card-flat glass-effect flex flex-col w-full flex-1 min-h-0">
                 <header class="flex items-center justify-between p-4 border-b border-color flex-shrink-0">
                     <h3 id="modal-title" class="text-lg font-semibold"></h3>
                     <button id="modal-close-btn" class="modal-close-trigger p-2 rounded-full transition-colors hover:bg-black/10">
@@ -1008,5 +1005,4 @@
     </script>
 
 </body>
-
 </html>

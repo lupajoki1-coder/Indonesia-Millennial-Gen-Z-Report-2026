@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[IDN Research Institute]-Indonesia Millennial Gen Z Report 2026</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            /* Tema 1: Cahaya (Default) */
+            --cahaya-bg: #f8fafc; /* slate-50 */
+            --cahaya-bg-alt: #ffffff; /* white */
+            --cahaya-text: #0f172a; /* slate-900 */
+            --cahaya-text-secondary: #64748b; /* slate-500 */
+            --cahaya-border: #e2e8f0; /* slate-200 */
+            --cahaya-accent: #db2777; /* pink-600 */
+
+            /* Tema 2: Gelap */
+            --gelap-bg: #0f172a; /* slate-900 */
+            --gelap-bg-alt: #1e293b; /* slate-800 */
+            --gelap-text: #e2e8f0; /* slate-200 */
+            --gelap-text-secondary: #94a3b8; /* slate-400 */
+            --gelap-border: #334155; /* slate-700 */
+            --gelap-accent: #f472b6; /* pink-400 */
+            
+            /* Tema 3, 4, 5 Dihapus */
+        }
+
+        [data-theme="cahaya"] {
+            --bg-color: var(--cahaya-bg);
+            --bg-alt-color: var(--cahaya-bg-alt);
+            --text-color: var(--cahaya-text);
+            --text-secondary-color: var(--cahaya-text-secondary);
+            --border-color: var(--cahaya-border);
+            --accent-color: var(--cahaya-accent);
+        }
+
+        [data-theme="gelap"] {
+            --bg-color: var(--gelap-bg);
+            --bg-alt-color: var(--gelap-bg-alt);
+            --text-color: var(--gelap-text);
+            --text-secondary-color: var(--gelap-text-secondary);
+            --border-color: var(--gelap-border);
+            --accent-color: var(--gelap-accent);
+        }
+
+        /* data-theme senja, samudra, hutan Dihapus */
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            /* Proteksi Data: Anti-copy */
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+ */
+            user-select: none; /* Standard */
+        }
+        
+        /* Efek Kedalaman (Depth) - LEBIH KUAT */
+        .deep-card {
+            background-color: var(--bg-alt-color);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem; /* 16px */
+            /* Bayangan lebih kuat (setara shadow-xl) */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .deep-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            /* Bayangan hover lebih kuat (setara shadow-2xl) */
+            box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .deep-card-flat {
+            background-color: var(--bg-alt-color);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem; /* 16px */
+            /* Bayangan lebih kuat (setara shadow-lg) */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -4px rgba(0, 0, 0, 0.07);
+        }
+
+        /* EFEK BARU: Glassmorphism (Kaca Buram) */
+        .glass-effect {
+            /* 80% opacity background, 95% untuk mode gelap agar kontras */
+            background-color: color-mix(in srgb, var(--bg-alt-color) 80%, transparent);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid color-mix(in srgb, var(--border-color) 50%, transparent);
+        }
+        [data-theme="gelap"] .glass-effect,
+        [data-theme="senja"] .glass-effect {
+             background-color: color-mix(in srgb, var(--bg-alt-color) 85%, transparent);
+        }
+        /* Mobile menu overlay lebih pekat agar terbaca */
+        #mobile-menu.glass-effect {
+            background-color: color-mix(in srgb, var(--bg-color) 95%, transparent);
+        }
+
+
+        .text-secondary { color: var(--text-secondary-color); }
+        .accent-text { color: var(--accent-color); }
+        .accent-bg { background-color: var(--accent-color); }
+        .border-color { border-color: var(--border-color); }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-secondary-color); }
+        
+        /* Nav active state */
+        .nav-link.active {
+            color: var(--accent-color);
+            background-color: color-mix(in srgb, var(--accent-color) 15%, transparent);
+            font-weight: 600;
+        }
+        .nav-link:hover {
+            color: var(--text-color);
+            background-color: color-mix(in srgb, var(--border-color) 50%, transparent);
+        }
+
+        /* Mobile Nav Menu (Fullscreen Overlay) */
+        #mobile-menu {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+            /* Dihapus: background-color: var(--bg-color); - Diganti .glass-effect */
+        }
+        #mobile-menu.open {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        /* Modal Styling */
+        .modal-backdrop {
+            transition: opacity 0.3s ease;
+        }
+        .modal-content-wrapper {
+            transition: all 0.3s ease;
+        }
+        #modal-container.hidden .modal-backdrop {
+            opacity: 0;
+        }
+        #modal-container.hidden .modal-content-wrapper {
+            opacity: 0;
+            transform: scale(0.95) translateY(20px);
+        }
+        
+        /* Animasi Fade-in-up (Hanya untuk Section) */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Animasi Staggered (Bertahap) untuk Kartu */
+        .fade-in-up .deep-card {
+            opacity: 0;
+            transform: translateY(20px);
+            /* Transisi akan ditambahkan oleh JS */
+        }
+        .fade-in-up .deep-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* CSS untuk Sidebar Canggih (Collapsible) */
+        #sidebar.collapsed .nav-text,
+        #sidebar.collapsed .logo-text,
+        #sidebar.collapsed .theme-switcher-text {
+            opacity: 0;
+            visibility: hidden;
+            width: 0;
+            transition: opacity 0.1s ease-out, visibility 0.1s 0.1s, width 0.1s 0.1s;
+        }
+        #sidebar:not(.collapsed) .nav-text,
+        #sidebar:not(.collapsed) .logo-text,
+        #sidebar:not(.collapsed) .theme-switcher-text {
+            opacity: 1;
+            visibility: visible;
+            width: auto;
+            transition: opacity 0.2s ease-in 0.1s;
+        }
+        #sidebar.collapsed .nav-link {
+            justify-content: center;
+        }
+        #sidebar.collapsed .nav-link .nav-text {
+            display: none; 
+        }
+        #sidebar:not(.collapsed) .nav-link .nav-text {
+            display: block;
+        }
+        #sidebar.collapsed #collapse-btn-icon {
+            transform: rotate(180deg);
+        }
+        #sidebar.collapsed .theme-btn-container {
+            justify-content: center;
+        }
+        #sidebar .logo-text, #sidebar .nav-text {
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        /* Theme button container */
+        .theme-btn-container {
+            display: flex;
+            align-items: center;
+            padding: 0.25rem; /* p-1 */
+            border-radius: 9999px; /* rounded-full */
+            border: 1px solid var(--border-color);
+        }
+        .theme-btn {
+            padding: 0.375rem; /* p-1.5 */
+            border-radius: 9999px; /* rounded-full */
+            flex-grow: 1; /* flex-1 */
+        }
+        /* Mobile theme button */
+        .mobile-theme-btn-container {
+             display: flex;
+            align-items: center;
+            padding: 0.375rem; /* p-1.5 */
+            border-radius: 9999px; /* rounded-full */
+            border: 1px solid var(--border-color);
+            max-width: 20rem; /* max-w-xs */
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .mobile-theme-btn {
+            padding: 0.5rem; /* p-2 */
+            border-radius: 9999px; /* rounded-full */
+            flex-grow: 1; /* flex-1 */
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden break-words" oncontextmenu="return false;">
+
+    <!-- Kontainer Utama -->
+    <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="lg:flex lg:gap-8">
+            
+            <!-- Navigasi Sidebar (Desktop) - DENGAN EFEK KACA -->
+            <aside id="sidebar" class="hidden lg:block lg:w-64 h-screen sticky top-0 py-8 flex-shrink-0 transition-all duration-300 glass-effect rounded-2xl my-8 mr-[-1rem]">
+                <div class="h-full flex flex-col space-y-8">
+                    <div class="px-4 flex items-center justify-between">
+                        <div class="flex items-center gap-3 logo-container overflow-hidden">
+                            <i data-lucide="bar-chart-big" class="w-8 h-8 accent-text flex-shrink-0"></i>
+                            <div class="logo-text">
+                                <h1 class="font-bold text-lg leading-tight truncate" title="[IDN Research Institute]-Indonesia Millennial Gen Z Report 2026">[IDN Research Institute]...</h1>
+                                <p class="text-xs text-secondary">Laporan 2026</p>
+                            </div>
+                        </div>
+                        <button id="collapse-btn" class="hidden lg:block p-2 rounded-full hover:bg-white/10 flex-shrink-0">
+                            <i id="collapse-btn-icon" data-lucide="chevron-left" class="w-5 h-5 transition-transform duration-300"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Navigasi Desktop -->
+                    <nav id="desktop-nav" class="flex-grow flex flex-col space-y-2 overflow-y-auto overflow-x-hidden px-4">
+                        <a href="#hero" class="nav-link text-sm font-medium px-4 py-2.5 rounded-lg transition-colors duration-200 flex items-center gap-3"><i data-lucide="home" class="w-5 h-5 flex-shrink-0"></i> <span class="nav-text">Beranda</span></a>
+                        <a href="#tldr" class="nav-link text-sm font-medium px-4 py-2.5 rounded-lg transition-colors duration-200 flex items-center gap-3"><i data-lucide="sparkles" class="w-5 h-5 flex-shrink-0"></i> <span class="nav-text">Rangkuman Utama</span></a>
+                        <a href="#chapter1" class="nav-link text-sm font-medium px-4 py-2.5 rounded-lg transition-colors duration-200 flex items-center gap-3"><i data-lucide="heart-handshake" class="w-5 h-5 flex-shrink-0"></i> <span class="nav-text">Nilai & Keluarga</span></a>
+                        <a href="#chapter2" class="nav-link text-sm font-medium px-4 py-2.5 rounded-lg transition-colors duration-200 flex items-center gap-3"><i data-lucide="credit-card" class="w-5 h-5 flex-shrink-0"></i> <span class="nav-text">Finansial & Konsumsi</span></a>
+                        <a href="#chapter3" class="nav-link text-sm font-medium px-4 py-2.5 rounded-lg transition-colors duration-200 flex items-center gap-3"><i data-lucide="briefcase" class="w-5 h-5 flex-shrink-0"></i> <span class="nav-text">Karier & Edukasi</span></a>
+                        <a href="#chapter4" class="nav-link text-sm font-medium px-4 py-2.5 rounded-lg transition-colors duration-200 flex items-center gap-3"><i data-lucide="popcorn" class="w-5 h-5 flex-shrink-0"></i> <span class="nav-text">Media & Hiburan</span></a>
+                        <a href="#chapter5" class="nav-link text-sm font-medium px-4 py-2.5 rounded-lg transition-colors duration-200 flex items-center gap-3"><i data-lucide="megaphone" class="w-5 h-5 flex-shrink-0"></i> <span class="nav-text">Advokasi & Partisipasi</span></a>
+                        <a href="#chapter6" class="nav-link text-sm font-medium px-4 py-2.5 rounded-lg transition-colors duration-200 flex items-center gap-3"><i data-lucide="baby" class="w-5 h-5 flex-shrink-0"></i> <span class="nav-text">Generasi Alpha</span></a>
+                    </nav>
+                    
+                    <!-- Theme Switcher (2 Tema) -->
+                    <div class="px-4 flex-shrink-0 overflow-hidden">
+                        <p class="text-xs text-secondary mb-2 font-medium theme-switcher-text">Pilih Tema</p>
+                         <div class="theme-btn-container deep-card-flat">
+                            <button class="theme-btn" title="Mode Cahaya" data-theme="cahaya"><i data-lucide="sun" class="w-5 h-5 mx-auto"></i></button>
+                            <button class="theme-btn" title="Mode Gelap" data-theme="gelap"><i data-lucide="moon" class="w-5 h-5 mx-auto"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Konten Utama -->
+            <main class="flex-1 min-w-0 py-8">
+                
+                <!-- Header Mobile - DENGAN EFEK KACA -->
+                <header class="lg:hidden sticky top-0 z-30 w-full mb-6">
+                    <div class="deep-card-flat glass-effect p-3 flex items-center justify-between">
+                         <div class="flex items-center gap-3">
+                            <i data-lucide="bar-chart-big" class="w-7 h-7 accent-text"></i>
+                            <div>
+                                <h1 class="font-bold text-base leading-tight truncate" title="[IDN Research Institute]-Indonesia Millennial Gen Z Report 2026">[IDN Research Institute]...</h1>
+                            </div>
+                        </div>
+                        <button id="menu-toggle-btn" class="p-2 rounded-full">
+                            <i data-lucide="menu" class="w-6 h-6"></i>
+                        </button>
+                    </div>
+                </header>
+                
+                <!-- Bagian Hero - DENGAN EFEK PARALLAX -->
+                <section id="hero" class="mb-16 md:mb-20 scroll-mt-24">
+                    <div class="relative rounded-2xl overflow-hidden p-8 md:p-12 min-h-[400px] flex flex-col justify-end text-white deep-card-flat">
+                         <img id="hero-image" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop" 
+                             alt="Anak muda Millennial dan Gen Z berinteraksi" 
+                             class="absolute inset-0 w-full h-full object-cover z-0">
+                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10"></div>
+                         <div class="relative z-20">
+                            <h1 class="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight" style="animation: fadeInUp 0.8s ease-out 0.2s backwards;">Memahami Perjalanan Millennial & Gen Z</h1>
+                            <p class="text-lg text-slate-200 max-w-2xl" style="animation: fadeInUp 0.8s ease-out 0.4s backwards;">Ini bukan sekadar tren. Ini adalah panduan untuk memahami cara mereka berpikir, merasa, dan membentuk masa depan kita bersama.</p>
+                            <div class="mt-4 flex items-center gap-2 text-slate-300 text-sm" style="animation: fadeInUp 0.8s ease-out 0.6s backwards;">
+                                <i data-lucide="clock" class="w-4 h-4"></i>
+                                <span>Estimasi Waktu Membaca: 12 Menit</span>
+                            </div>
+                         </div>
+                    </div>
+                </section>
+                
+                <!-- Kontainer Bagian -->
+                <div class="space-y-16 md:space-y-20">
+                    
+                    <!-- Rangkuman Utama -->
+                    <section id="tldr" class="scroll-mt-24 fade-in-up">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6 flex items-center gap-4"><i data-lucide="sparkles" class="w-9 h-9 accent-text"></i>Rangkuman Utama</h2>
+                        <!-- Kartu ini akan dianimasikan oleh JS -->
+                        <div class="deep-card p-6 md:p-8">
+                            <p class="text-lg text-secondary mb-4">Bagi Anda yang ingin rangkuman cepat, inilah intinya. Laporan ini adalah sahabat Anda untuk memahami <strong>Millennial (usia 29-44)</strong> & <strong>Gen Z (usia 13-28)</strong>. Intinya, mereka bukan generasi yang pasif. Mereka sedang <span class="font-semibold text-color">aktif mendefinisikan ulang</span> semua aturan main.</p>
+                            <p class="text-lg text-secondary">Mereka lebih memilih <span class="font-semibold text-color">keuangan yang etis</span> daripada yang sekadar nyaman, lebih mengutamakan <span class="font-semibold text-color">kesejahteraan mental</span> (well-being) daripada <span class="font-semibold text-color">hustle culture</span>, dan mencari <span class="font-semibold text-color">makna</span> dalam setiap pilihan hidup. Mari kita telusuri perjalanan mereka.</p>
+                            <button class="modal-open-btn mt-6 inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-white accent-bg shadow-lg hover:shadow-xl transition-shadow"
+                                    data-modal-id="data-tldr-content"
+                                    data-modal-title="Kajian Mendalam: Rangkuman Utama">
+                                <i data-lucide="book-open" class="w-4 h-4"></i>
+                                Baca Latar Belakang Laporan
+                            </button>
+                        </div>
+                    </section>
+
+                    <!-- Chapter 1: Nilai & Keluarga -->
+                    <section id="chapter1" class="scroll-mt-24 fade-in-up">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-8 flex items-center gap-4"><i data-lucide="heart-handshake" class="w-9 h-9 accent-text"></i>Nilai & Keluarga</h2>
+                        <!-- Kartu-kartu di dalam grid ini akan dianimasikan bertahap oleh JS -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            
+                            <div class="deep-card flex flex-col p-6">
+                                <i data-lucide="users" class="w-10 h-10 accent-text mb-3"></i>
+                                <h3 class="text-xl font-semibold mb-2">Identitas: Pencapaian vs Ekspresi</h3>
+                                <p class="text-sm text-secondary mb-4 flex-grow">Millennial mengikat identitas pada pencapaian & tanggung jawab, sementara Gen Z mendefinisikannya melalui ekspresi diri yang jujur dan cair.</p>
+                                <button class="modal-open-btn text-sm font-semibold accent-text inline-flex items-center gap-1 group"
+                                        data-modal-id="data-ch1-1"
+                                        data-modal-title="Kajian Mendalam: Identitas & Ekspresi Diri">
+                                    Baca Selengkapnya <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                                </button>
+                            </div>
+
+                            <div class="deep-card flex flex-col p-6">
+                                <i data-lucide="rings" class="w-10 h-10 accent-text mb-3"></i>
+                                <h3 class="text-xl font-semibold mb-2">Pernikahan & Anak: Pilihan Sadar</h3>
+                                <p class="text-sm text-secondary mb-4 flex-grow">Menikah dan punya anak bukan lagi 'keharusan', tapi pilihan yang sangat dipertimbangkan, didorong oleh faktor biaya dan pengembangan diri.</p>
+                                <button class="modal-open-btn text-sm font-semibold accent-text inline-flex items-center gap-1 group"
+                                        data-modal-id="data-ch1-2"
+                                        data-modal-title="Kajian Mendalam: Pernikahan & Anak">
+                                    Baca Selengkapnya <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                                </button>
+                            </div>
+
+                            <div class="deep-card flex flex-col p-6">
+                                <i data-lucide="user-plus" class="w-10 h-10 accent-text mb-3"></i>
+                                <h3 class="text-xl font-semibold mb-2">'Keluarga Pilihan' (Chosen Family)</h3>
+                                <p class="text-sm text-secondary mb-4 flex-grow">Sahabat dan komunitas online menjadi sistem pendukung utama, menggantikan peran keluarga besar, terutama dalam proses pengasuhan anak.</p>
+                                <button class="modal-open-btn text-sm font-semibold accent-text inline-flex items-center gap-1 group"
+                                        data-modal-id="data-ch1-3"
+                                        data-modal-title="Kajian Mendalam: 'Keluarga Pilihan'">
+                                    Baca Selengkapnya <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="deep-card flex flex-col p-6">
+                                <i data-lucide="smile" class="w-10 h-10 accent-text mb-3"></i>
+                                <h3 class="text-xl font-semibold mb-2">Pola Asuh: Dari Otoritas ke Koneksi</h3>
+                                <p class="text-sm text-secondary mb-4 flex-grow">'Gentle parenting' dan 'Strawberry parenting' menjadi populer, fokus pada empati, komunikasi, dan memberi contoh (modelling) perilaku.</p>
+                                <button class="modal-open-btn text-sm font-semibold accent-text inline-flex items-center gap-1 group"
+                                        data-modal-id="data-ch1-4"
+                                        data-modal-title="Kajian Mendalam: Pola Asuh">
+                                    Baca Selengkapnya <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                                </button>
+                            </div>
+
+                        </div>
+                    </section>
+
+                    <!-- Chapter 2: Finansial & Konsumsi -->
+                    <section id="chapter2" class="scroll-mt-24 fade-in-up">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-8 flex items-center gap-4"><i data-lucide="credit-card" class="w-9 h-9 accent-text"></i>Finansial & Konsumsi</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                            <div class="deep-card flex flex-col p-6">
+                                <i data-lucide="trending-down" class="w-10 h-10 accent-text mb-3"></i>
+                                <h3 class="text-xl font-semibold mb-2">Tantangan: Erosi Kelas Menengah</h3>
+                                <p class="text-sm text-secondary mb-4 flex-grow">Kelas menengah menyusut hampir 10 juta (2019-2024). Ini mendorong gaya hidup minimalis dan menunda menikah sebagai strategi bertahan hidup.</p>
+                                <button class="modal-open-btn text-sm font-semibold accent-text inline-flex items-center gap-1 group"
+                                        data-modal-id="data-ch2-1"
+                                        data-modal-title="Kajian Mendalam: Erosi Kelas Menengah">
+                                    Baca Selengkapnya <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                                </button>
+                            </div>
+
+                            <div class="deep-card flex flex-col p-6">
+                                <i data-lucide="piggy-bank" class="w-10 h-10 accent-text mb-3"></i>
+                                <h3 class="text-xl font-semibold mb-2">Prioritas Menabung: Darurat vs 'Healing'</h3>
+                                <p class="text-sm text-secondary mb-4 flex-grow">Dana darurat adalah prioritas No. 1, namun 'Soft Saving' (nabung fleksibel untuk self-care) juga penting. Gen Z juga melihat investasi (Kripto, NFT) sebagai ekspresi identitas.</p>
+                                <button class="modal-open-btn text-sm font-semibold accent-text inline-flex items-center gap-1 group"
+                                        data-modal-id="data-ch2-2"
+                                        data-modal-title="Kajian Mendalam: Prioritas Menabung">
+                                    Baca Selengkapnya <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                                </button>
+                            </div>
+
+                            <div class="deep-card flex flex-col p-6 md:col-span-2">
+                                <i data-lucide="shield-alert" class="w-10 h-10 accent-text mb-3"></i>
+                                <h3 class="text-xl font-semibold mb-2">Finfluencer, Paylater & Risiko Digital</h3>
+                                <p class="text-sm text-secondary mb-4 flex-grow">54% M-Z pernah menemukan penipuan finansial di sosmed, namun hanya 28% yang memverifikasi info. PayLater kini menjadi 'alat bertahan hidup', bukan sekadar gaya hidup, dengan 41% pengguna mengaku pernah lupa total tagihan.</p>
+                                <button class="modal-open-btn text-sm font-semibold accent-text inline-flex items-center gap-1 group"
+                                        data-modal-id="data-ch2-3"
+                                        data-modal-title="Kajian Mendalam: Risiko Finansial Digital">
+                                    Baca Selengkapnya <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                                </button>
+                            </div>
+
+                        </div>
+                    </section>
+                    
+                    <!-- Chapter 3: Karier & Edukasi -->
+                    <section id="chapter3" class="scroll-mt-24 fade-in-up">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-8 flex items-center gap-4"><i data-lucide="briefcase" class="w-9 h-9 accent-text"></i>Karier & Edukasi</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+
+                            <div class="deep-card flex flex-col p-6">
+                                <i data-lucide="graduation-cap" class="w-10 h-10 accent-text mb-3"></i>
+                                <h3 class="text-xl font-semibold mb-2">Kesenjangan Edukasi vs Realita</h3>
+                                <p class="text-sm text-secondary mb-4 flex-grow">Pengangguran lulusan universitas naik jadi 12,5%. Penyebab: Kurikulum ketinggalan (49%), kurang praktek (48%), dan kurangnya soft skill (46%).</p>
+                                <button class="modal-open-btn text-sm font-semibold accent-text inline-flex items-center gap-1 group"
+                                        data-modal-id="data-ch3-1"
+                                        data-modal-title="Kajian Mendalam: Kesenjangan Edukasi">
+                                    Baca Selengkapnya <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                                </button>
+                            </div>
+
+                            <div class="deep-card flex flex-col p-6">
+                                <i data-lucide="user-check" class="w-10 h-10 accent-text mb-3"></i>
+                                <h3 class="text-xl font-semibold mb-2">Definisi Ulang Karier: 'Side Hustle'</h3>
+                                <p class="text-sm text-secondary mb-4 flex-grow">57% M-Z menghindari jabatan manajer karena stres. 84% memiliki 'side-hustle', dan 52% mempertimbangkan resign untuk mencari fleksibilitas.</p>
+                                <button class="modal-open-btn text-sm font-semibold accent-text inline-flex items-center gap-1 group"
+                                        data-modal-id="data-ch3-2"
+                                        data-modal-title="Kajian Mendalam: Definisi Ulang Karier">
+                                    Baca Selengkapnya <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                                </button>
+                            </div>
+
+                            <div class="deep-card flex flex-col p-6 xl:col-span-1">
+                                <i data-lucide="brain-circuit" class="w-10 h-10 accent-text mb-3"></i>
+                                <h3 class="text-xl font-semibold mb-2">AI: Rekan Kerja, Bukan Ancaman</h3>
+                                <p class="text-sm text-secondary mb-4 flex-grow">Gen Z melihat AI sebagai pencipta peluang baru, bukan sekadar pengambil pekerjaan. Kesenjangan talenta terbesar saat ini: Ahli AI (45%) dan Soft Skills (32%).</p>
+                                <button class="modal-open-btn text-sm font-semibold accent-text inline-flex items-center gap-1 group"
+                                        data-modal-id="data-ch3-3"
+                                        data-modal-title="Kajian Mendalam: Pandangan Terhadap AI">
+                                    Baca Selengkapnya <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                                </button>
+                            </div>
+
+                        </div>
+                    </section>
+                    
+                    <!-- Chapter 4: Media & Hiburan -->
+                    <section id="chapter4" class="scroll-mt-24 fade-in-up">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-8 flex items-center gap-4"><i data-lucide="popcorn" class="w-9 h-9 accent-text"></i>Media & Hiburan</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                            <div class="deep-card flex flex-col p-6">
+                                <i data-lucide="heart" class="w-10 h-10 accent-text mb-3"></i>
+                                <h3 class="text-xl font-semibold mb-2">Fandom sebagai Identitas</h3>
+                                <p class="text-sm text-secondary mb-4 flex-grow">Hiburan bukan lagi pelarian, tapi identitas. 40% fans musik merasa idola membentuk identitas mereka. Menjadi fans adalah partisipasi aktif (beli merch, voting, dll).</p>
+                                <button class="modal-open-btn text-sm font-semibold accent-text inline-flex items-center gap-1 group"
+                                        data-modal-id="data-ch4-1"
+                                        data-modal-title="Kajian Mendalam: Fandom sebagai Identitas">
+                                    Baca Selengkapnya <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                                </button>
+                            </div>
+
+                            <div class="deep-card flex flex-col p-6">
+                                <i data-lucide="film" class="w-10 h-10 accent-text mb-3"></i>
+                                <h3 class="text-xl font-semibold mb-2">Tren Sinema: Realisme & Katarsis</h3>
+                                <p class="text-sm text-secondary mb-4 flex-grow">Dua genre laris: 'Slice-of-Life' (karena relatable & bahas mental health) dan 'Factory Horror' (horor dengan 'monster' berupa bos toksik & ketidakadilan kerja).</p>
+                                <button class="modal-open-btn text-sm font-semibold accent-text inline-flex items-center gap-1 group"
+                                        data-modal-id="data-ch4-2"
+                                        data-modal-title="Kajian Mendalam: Tren Sinema Baru">
+                                    Baca Selengkapnya <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                                </button>
+                            </div>
+
+                            <div class="deep-card flex flex-col p-6">
+                                <i data-lucide="play-square" class="w-10 h-10 accent-text mb-3"></i>
+                                <h3 class="text-xl font-semibold mb-2">Format Baru: Microdrama & Podcast</h3>
+                                <p class="text-sm text-secondary mb-4 flex-grow">61% M-Z nonton microdrama (1-5 menit) setiap hari. 50% lebih suka podcast dalam format video untuk melihat ekspresi. Tema 'Zero to Hero' paling diminati.</p>
+                                <button class="modal-open-btn text-sm font-semibold accent-text inline-flex items-center gap-1 group"
+                                        data-modal-id="data-ch4-3"
+                                        data-modal-title="Kajian Mendalam: Format Konten Baru">
+                                    Baca Selengkapnya <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                                </button>
+                            </div>
+
+                            <div class="deep-card flex flex-col p-6">
+                                <i data-lucide="bed-double" class="w-10 h-10 accent-text mb-3"></i>
+                                <h3 class="text-xl font-semibold mb-2">'Healing' 2.0: Istirahat & Regenerasi</h3>
+                                <p class="text-sm text-secondary mb-4 flex-grow">Rekreasi bergeser. Olahraga komunitas (padel, pickleball) menjadi ajang sosialisasi offline. 'Sleep Tourism' (>60% prioritas istirahat) dan 'Regenerative Tourism' (memulihkan ekosistem) menjadi tren.</p>
+                                <button class="modal-open-btn text-sm font-semibold accent-text inline-flex items-center gap-1 group"
+                                        data-modal-id="data-ch4-4"
+                                        data-modal-title="Kajian Mendalam: Evolusi 'Healing'">
+                                    Baca Selengkapnya <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                                </button>
+                            </div>
+
+                        </div>
+                    </section>
+                    
+                    <!-- Chapter 5: Advokasi & Partisipasi -->
+                    <section id="chapter5" class="scroll-mt-24 fade-in-up">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-8 flex items-center gap-4"><i data-lucide="megaphone" class="w-9 h-9 accent-text"></i>Advokasi & Partisipasi</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                            <div class="deep-card flex flex-col p-6">
+                                <i data-lucide="scale" class="w-10 h-10 accent-text mb-3"></i>
+                                <h3 class="text-xl font-semibold mb-2">Skeptis, Bukan Apatis</h3>
+                                <p class="text-sm text-secondary mb-4 flex-grow">Kepercayaan pada institusi diuji. Alasan utama: Korupsi (62%) dan kurangnya transparansi (48%). Gerakan digital seperti #IndonesiaGelap dianggap sebagai protes yang sah oleh >60% M-Z.</p>
+                                <button class="modal-open-btn text-sm font-semibold accent-text inline-flex items-center gap-1 group"
+                                        data-modal-id="data-ch5-1"
+                                        data-modal-title="Kajian Mendalam: Krisis Kepercayaan">
+                                    Baca Selengkapnya <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                                </button>
+                            </div>
+
+                            <div class="deep-card flex flex-col p-6">
+                                <i data-lucide="coffee" class="w-10 h-10 accent-text mb-3"></i>
+                                <h3 class="text-xl font-semibold mb-2">Aktivisme Gaya Baru: Kopi & Musik</h3>
+                                <p class="text-sm text-secondary mb-4 flex-grow">Aksi kini beragam. Memilih brand kopi lokal adalah pernyataan identitas. Musisi membentuk serikat (FESMI, VISI) untuk memperjuangkan royalti dan jaminan sosial.</p>
+                                <button class="modal-open-btn text-sm font-semibold accent-text inline-flex items-center gap-1 group"
+                                        data-modal-id="data-ch5-2"
+                                        data-modal-title="Kajian Mendalam: Aktivisme Gaya Baru">
+                                    Baca Selengkapnya <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- Chapter 6: Generasi Alpha -->
+                    <section id="chapter6" class="scroll-mt-24 fade-in-up">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-8 flex items-center gap-4"><i data-lucide="baby" class="w-9 h-9 accent-text"></i>Generasi Alpha</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            
+                            <div class="deep-card flex flex-col p-6">
+                                <i data-lucide="seedling" class="w-10 h-10 accent-text mb-3"></i>
+                                <h3 class="text-xl font-semibold mb-2">Generasi yang Disiapkan (Intentional)</h3>
+                                <p class="text-sm text-secondary mb-4 flex-grow">Gen Alpha (lahir 2010-2024) dibesarkan dengan 'kesadaran' (intentionality), berbeda dari Gen M (adaptasi) atau Gen Z (personal branding). Fokusnya adalah memproses emosi dan regulasi diri.</p>
+                                <button class="modal-open-btn text-sm font-semibold accent-text inline-flex items-center gap-1 group"
+                                        data-modal-id="data-ch6-1"
+                                        data-modal-title="Kajian Mendalam: Pola Asuh Gen Alpha">
+                                    Baca Selengkapnya <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                                </button>
+                            </div>
+
+                            <div class="deep-card flex flex-col p-6">
+                                <i data-lucide="globe-2" class="w-10 h-10 accent-text mb-3"></i>
+                                <h3 class="text-xl font-semibold mb-2">Identitas & Kebanggaan Lokal</h3>
+                                <p class="text-sm text-secondary mb-4 flex-grow">Gen Alpha terpapar tren global, namun tetap sangat bangga dengan budaya lokal. IP lokal seperti 'Jumbo' dan 'Nussa' menjadi bagian penting dari pembentukan identitas mereka.</p>
+                                <button class="modal-open-btn text-sm font-semibold accent-text inline-flex items-center gap-1 group"
+                                        data-modal-id="data-ch6-2"
+                                        data-modal-title="Kajian Mendalam: Identitas & Budaya Gen Alpha">
+                                    Baca Selengkapnya <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                                </button>
+                            </div>
+
+                        </div>
+                    </section>
+                </div>
+                
+                 <!-- Footer -->
+                <footer class="border-t border-color mt-16 md:mt-24 pt-8 text-center">
+                    <div class="text-sm text-secondary space-y-1">
+                        <p>©2025 visualisasi oleh Kashafa-MentorPLUS</p>
+                        <p>layanan lainnya di <a href="https://kashafa-mentorplus.my.id/" target="_blank" rel="noopener noreferrer" class="font-medium accent-text hover:underline">https://kashafa-mentorplus.my.id/</a></p>
+                    </div>
+                </footer>
+            </main>
+        </div>
+    </div>
+
+    <!-- Mobile Nav Menu (Fullscreen Overlay) - DENGAN EFEK KACA -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 p-4 pt-20 flex flex-col glass-effect">
+        <button id="menu-close-btn" class="absolute top-6 right-4 p-2">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        <nav class="flex flex-col space-y-4">
+            <a href="#hero" class="mobile-nav-link nav-link text-xl font-medium px-4 py-3 rounded-lg flex items-center gap-4"><i data-lucide="home" class="w-6 h-6"></i> Beranda</a>
+            <a href="#tldr" class="mobile-nav-link nav-link text-xl font-medium px-4 py-3 rounded-lg flex items-center gap-4"><i data-lucide="sparkles" class="w-6 h-6"></i> Rangkuman</a>
+            <a href="#chapter1" class="mobile-nav-link nav-link text-xl font-medium px-4 py-3 rounded-lg flex items-center gap-4"><i data-lucide="heart-handshake" class="w-6 h-6"></i> Nilai & Keluarga</a>
+            <a href="#chapter2" class="mobile-nav-link nav-link text-xl font-medium px-4 py-3 rounded-lg flex items-center gap-4"><i data-lucide="credit-card" class="w-6 h-6"></i> Finansial</a>
+            <a href="#chapter3" class="mobile-nav-link nav-link text-xl font-medium px-4 py-3 rounded-lg flex items-center gap-4"><i data-lucide="briefcase" class="w-6 h-6"></i> Karier & Edukasi</a>
+            <a href="#chapter4" class="mobile-nav-link nav-link text-xl font-medium px-4 py-3 rounded-lg flex items-center gap-4"><i data-lucide="popcorn" class="w-6 h-6"></i> Media & Hiburan</a>
+            <a href="#chapter5" class="mobile-nav-link nav-link text-xl font-medium px-4 py-3 rounded-lg flex items-center gap-4"><i data-lucide="megaphone" class="w-6 h-6"></i> Advokasi</a>
+            <a href="#chapter6" class="mobile-nav-link nav-link text-xl font-medium px-4 py-3 rounded-lg flex items-center gap-4"><i data-lucide="baby" class="w-6 h-6"></i> Generasi Alpha</a>
+        </nav>
+        <div class="mt-auto pt-8">
+            <p class="text-sm text-secondary mb-2 font-medium text-center">Pilih Tema</p>
+             <div class="mobile-theme-btn-container deep-card-flat">
+                <button class="theme-btn mobile-theme-btn" title="Mode Cahaya" data-theme="cahaya"><i data-lucide="sun" class="w-5 h-5 mx-auto"></i></button>
+                <button class="theme-btn mobile-theme-btn" title="Mode Gelap" data-theme="gelap"><i data-lucide="moon" class="w-5 h-5 mx-auto"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Container -->
+    <div id="modal-container" class="fixed inset-0 z-[99] p-4 flex items-center justify-center hidden">
+        <!-- Backdrop -->
+        <div id="modal-backdrop" class="modal-close-trigger fixed inset-0 bg-black/70 backdrop-blur-sm"></div>
+        
+        <!-- Content -->
+        <div class="modal-content-wrapper relative w-full max-w-3xl max-h-[90vh] flex">
+            <!-- Kartu modal sekarang juga memiliki efek kaca -->
+            <div class="deep-card-flat glass-effect flex flex-col h-full w-full">
+                <header class="flex items-center justify-between p-4 border-b border-color flex-shrink-0">
+                    <h3 id="modal-title" class="text-lg font-semibold"></h3>
+                    <button id="modal-close-btn" class="modal-close-trigger p-2 rounded-full transition-colors hover:bg-black/10">
+                        <i data-lucide="x" class="w-5 h-5"></i>
+                    </button>
+                </header>
+                <!-- PERBAIKAN SCROLL: flex-1 memastikan div ini mengisi sisa ruang & overflow-y-auto berfungsi -->
+                <div id="modal-body" class="p-6 overflow-y-auto space-y-4 text-secondary flex-1">
+                    <!-- Verbatim content will be injected here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Verbatim Data Store (Hidden) -->
+    <div id="verbatim-data-store" class="hidden">
+        
+        <!-- TL;DR -->
+        <div id="data-tldr-content">
+            <p>Di dunia saat ini, setiap keputusan—mulai dari cara kita membelanjakan uang hingga cara kita terhubung—mencerminkan keyakinan yang lebih dalam tentang identitas, keamanan, dan tujuan. Untuk benar-benar memahami Milenial dan Gen Z di Indonesia, kita harus melampaui tren di permukaan. Kita perlu menjelajahi nilai-nilai di balik tindakan mereka, emosi yang memengaruhi pilihan mereka, dan konteks yang berkembang yang membentuk hidup mereka.</p>
+            <p>Laporan Milenial dan Gen Z Indonesia 2026 dari IDN Research Institute menawarkan kedalaman tersebut. Ini bukan hanya analisis demografis, tetapi studi yang berpusat pada manusia yang menghubungkan perilaku dengan niat dan psikologi dengan tujuan.</p>
+            <p>Milenial, berusia 29 hingga 44 tahun, dan Gen Z, berusia 13 hingga 28 tahun, tidak hanya beradaptasi dengan dunia yang berubah. Mereka secara aktif membentuknya kembali. Mereka mendefinisikan ulang kesuksesan, merekonstruksi sistem, dan mendorong relevansi, representasi, dan tanggung jawab di ruang yang mereka tempati. Apa yang mendorong mereka bukan hanya tekanan eksternal tetapi keinginan internal yang mendalam untuk hidup lebih sadar dan berkontribusi lebih bermakna.</p>
+            <p>Mereka memilih keuangan etis daripada kenyamanan, kesejahteraan jangka panjang daripada budaya 'hustle', dan narasi inklusif daripada daya tarik massal. Inti dari pengambilan keputusan mereka adalah rasa niat yang kuat. Baik menjelajahi pivot karier, bergabung dengan gerakan online, atau merangkul gaya hidup yang lebih sederhana, mereka bergerak dengan kejelasan bahkan ketika hasilnya masih belum pasti.</p>
+        </div>
+
+        <!-- Chapter 1 -->
+        <div id="data-ch1-1">
+            <p><strong>Milenial</strong> dibesarkan selama era Reformasi dan tumbuh dengan nilai-nilai komunal yang kuat. Identitas mereka sering terkait dengan pencapaian, tanggung jawab, dan memenuhi peran seperti menjadi penyedia yang dapat diandalkan atau anggota keluarga yang setia. Meskipun mereka menggunakan platform digital secara aktif, mereka masih menghargai validasi offline dan pengakuan sosial melalui tonggak tradisional.</p>
+            <p><strong>Gen Z</strong>, sebaliknya, tumbuh dewasa di dunia yang sepenuhnya digital. Mereka lebih nyaman mengekspresikan kerentanan, menetapkan batasan emosional, dan mendefinisikan identitas mereka secara cair. Ekspresi diri bukanlah sesuatu yang mereka peroleh—itu adalah fondasi bagaimana mereka menavigasi kehidupan. Mereka fasih secara emosional dan sering menggunakan ruang online untuk mengartikulasikan perasaan dan keyakinan mereka.</p>
+        </div>
+        <div id="data-ch1-2">
+            <p>Dengan makna individu menjadi pusat perhatian, tonggak kehidupan tradisional seperti pernikahan dan menjadi orang tua tidak lagi diasumsikan, mereka dipertimbangkan kembali secara aktif. Milenial dan Gen Z sedang menulis ulang naskah ini. Banyak yang menunda atau mempertimbangkan kembali komitmen ini sama sekali, didorong oleh ketidakpastian ekonomi, dinamika gender yang berkembang, dan gagasan yang berubah tentang apa artinya membangun keluarga.</p>
+            <p>Pergeseran ini didukung oleh data nasional. Antara 2018 dan 2023, pernikahan di Indonesia turun dari lebih dari 2 juta menjadi hanya 1,57 juta. Di kalangan pemuda, perubahannya lebih tajam: hanya 30,61% pemuda Indonesia yang menikah pada 2023—turun dari 44,45% pada 2014. Pesannya jelas: lebih sedikit yang menikah, dan mereka yang menikah, melakukannya dengan cara mereka sendiri.</p>
+            <p>Stres tidak lagi hanya eksternal tetapi tentang menavigasi identitas, ekspektasi, dan urgensi diam-diam untuk bertahan hidup. Tekanan finansial terus membebani, terutama bagi Milenial (44%). Tetapi itu hanya sebagian dari cerita. Gen Z, khususnya, membawa beban emosional yang berbeda: ketakutan disalahpahami (48%).</p>
+            <p>Pola pikir ini juga membentuk bagaimana pemuda Indonesia memandang peran sebagai orang tua. Itu bukan lagi bab berikutnya yang diasumsikan, tetapi pilihan yang sangat dipertimbangkan dan didorong oleh nilai. Data menunjukkan bahwa ketidaksiapan emosional, yang sering diasumsikan sebagai penghalang utama, hanya dikutip oleh seperempat responden (23%).</p>
+            <p>Kekhawatiran utama adalah biaya pendidikan & kesehatan (65% Milenial, 63% Gen Z) dan dampak pada Karier/Pertumbuhan Pribadi (58% Milenial, 62% Gen Z).</p>
+        </div>
+        <div id="data-ch1-3">
+            <p>Bagi banyak Milenial dan Gen Z di Indonesia, membesarkan anak bukan lagi upaya solo; ini adalah pengalaman yang berlabuh di komunitas, sangat dibentuk oleh persahabatan, koneksi digital, dan pergeseran harapan dukungan. Di tengah penundaan pernikahan dan perubahan komposisi rumah tangga, teman bukan lagi hanya pendamping; mereka adalah co-pilot dalam menavigasi beban emosional.</p>
+            <p>Bagi 1 dari 3 responden Gen Z, teman berfungsi sebagai sistem pendukung utama mereka.</p>
+            <p>Data menunjukkan bahwa 58% orang tua di kota-kota besar merasa sendirian dalam membuat keputusan pengasuhan, dan 62% mengalami kelelahan mental darinya. Hampir setengah (47%) beralih ke 'keluarga pilihan'—teman dekat, grup digital, atau mentor sebaya—untuk mengelola beban pengasuhan harian. Pada saat yang sama, platform digital telah muncul sebagai infrastruktur emosional. 78% ibu di Indonesia beralih ke media sosial tidak hanya untuk informasi pengasuhan, tetapi untuk solidaritas dan bahasa bersama. Sementara itu, 51% menggunakan aplikasi telemedisin untuk merawat anak-anak mereka.</p>
+        </div>
+        <div id="data-ch1-4">
+            <p>Evolusi dalam jaringan dukungan ini digaungkan dalam bagaimana orang tua Indonesia membentuk kembali pendekatan mereka terhadap pengasuhan anak—dari didorong oleh otoritas menjadi selaras secara emosional. Konsep seperti 'gentle parenting', literasi emosional, dan kesadaran (mindfulness) telah bergerak dari pinggiran ke arus utama.</p>
+            <p>Satu ekspresi penting dari pergeseran yang lebih luas ini adalah munculnya 'strawberry parenting', istilah yang dimulai sebagai kritik terhadap kerapuhan emosional tetapi telah berevolusi menjadi singkatan bernuansa untuk gaya pengasuhan yang berakar pada responsivitas emosional, keterikatan aman, dan pengambilan keputusan bersama.</p>
+            <p>Pergeseran ini terlihat dalam nilai-nilai pengasuhan. Rasa hormat dan keterlibatan sosial tetap dijunjung tinggi (48% memprioritaskan sopan santun), namun prioritas modern mendapatkan tempat. Empati, keadilan, dan kesadaran emosional (37%) semakin dipandang sama pentingnya untuk perkembangan anak.</p>
+            <p>60% orang tua Milenial dan Gen Z mengatakan mereka lebih fokus pada pemodelan perilaku daripada menegakkan aturan—percaya bahwa anak-anak belajar paling baik melalui observasi, bukan instruksi. 55% juga percaya bahwa memberi contoh lebih efektif daripada pengingat verbal.</p>
+        </div>
+
+        <!-- Chapter 2 -->
+        <div id="data-ch2-1">
+            <p>Erosi kelas menengah Indonesia bukan lagi hanya tren ekonomi—ini membentuk kembali aspirasi dan pilihan gaya hidup. Hampir 10 juta orang keluar dari kelas menengah antara 2019 dan 2024, sementara kelas menengah yang bercita-cita (aspiring middle class) tumbuh secara signifikan (Bank Dunia, 2024).</p>
+            <p>Kaum muda saat ini menghadapi ketidakstabilan pekerjaan, gaji yang stagnan, dan kenaikan biaya dalam ekonomi pasca-industri yang menawarkan lebih sedikit perlindungan. Kontrak sosial yang pernah menjanjikan mobilitas ke atas kini sedang terkikis. Menunda pernikahan atau kepemilikan rumah, mengadopsi gaya hidup minimalis, dan mengambil pekerjaan sampingan bukanlah tren, itu adalah strategi bertahan hidup.</p>
+            <p>Tekanan ekonomi teratas yang dihadapi: Kontrak Kerja Jangka Pendek (Kurangnya Stabilitas Pendapatan) (56%), Lulusan Baru Berjuang Mencari Pekerjaan Bergaji Layak (54%), Kenaikan Biaya Pendidikan dan Kesehatan (53%). 64% Gen Z Indonesia mengalami stres finansial, didorong oleh inflasi, upah yang stagnan, serta tekanan sosial dan digital.</p>
+        </div>
+        <div id="data-ch2-2">
+            <p>Dana darurat adalah prioritas tabungan nomor satu bagi kaum muda Indonesia. Sebanyak 63% responden menempatkannya di atas semua tujuan tabungan lainnya. Namun, urgensi ini tidak merata. Di kota-kota besar (70%) vs kota-kota sekunder (56%).</p>
+            <p>Hanya 23% Gen Z yang memiliki dana darurat tiga bulan—dibandingkan dengan 69% Milenial (OCBC NISP Index, 2024). Ini bukan karena kecerobohan, tetapi volatilitas kontekstual.</p>
+            <p>Munculnya "soft saving" di kalangan Milenial dan Gen Z menandakan lebih dari sekadar perubahan perilaku finansial; ini menandai kalibrasi ulang psikologis dan emosional. Soft saving mengacu pada pendekatan manajemen uang yang lebih fleksibel dan selaras secara emosional, di mana individu memberi ruang untuk kesenangan kecil dan perawatan diri, bahkan jika itu berarti menabung dengan kurang agresif.</p>
+            <p>Di tengah ketidakpastian yang meningkat, 42% Gen Z Indonesia tertarik pada aset berisiko tinggi seperti mata uang kripto dan NFT. Bagi banyak orang, berinvestasi bukan hanya tentang mengejar keuntungan—ini tentang identitas, budaya, dan rasa memiliki. Ini menandai pergeseran dari memandang kekayaan murni sebagai akumulasi menjadi memahaminya sebagai keselarasan dan agensi.</p>
+        </div>
+        <div id="data-ch2-3">
+            <p>Platform digital telah menjadi sumber utama pengetahuan keuangan. Ini telah mendemokratisasi pendidikan keuangan tetapi juga membuka pintu terhadap risiko baru. Saat ini, 54% Gen Z dan Milenial Indonesia melaporkan pernah mengalami setidaknya satu penipuan finansial di media sosial.</p>
+            <p>Meskipun fasih digital, banyak anak muda Indonesia berjuang dengan regulasi emosional dan pemikiran kritis yang diperlukan untuk menavigasi risiko keuangan online. Hanya 37% yang merasa percaya diri mengenali penipuan finansial, dan hanya 28% yang secara konsisten memverifikasi saran yang mereka terima dari influencer.</p>
+            <p>Milenial dan Gen Z memercayai influencer pada tingkat yang sama (33%), tetapi Milenial fokus pada keuangan dan politik, sementara Gen Z cenderung pada gaya hidup dan identitas.</p>
+            <p>Lonjakan platform Buy Now, Pay Later (BNPL) telah mengubah cara generasi muda menavigasi uang. Hanya 26% responden Gen Z yang menyatakan kekhawatiran tentang risiko BNPL, dibandingkan dengan 34% Milenial. 41% pengguna BNPL berusia 20-an kehilangan jejak komitmen bulanan mereka. 52% percaya BNPL mendorong pengeluaran berlebihan.</p>
+        </div>
+
+        <!-- Chapter 3 -->
+        <div id="data-ch3-1">
+            <p>Meskipun lebih banyak siswa masuk kelas daripada sebelumnya, sistem pendidikan Indonesia terus berjuang mempersiapkan mereka untuk dunia yang akan mereka hadapi. Menurut PISA 2022, 75% siswa Indonesia berusia 15 tahun tidak memenuhi tingkat kemahiran minimum dalam membaca dan matematika.</p>
+            <p>60% Milenial dan Gen Z menyebut kendala finansial sebagai alasan utama mereka tidak dapat melanjutkan pendidikan tinggi.</p>
+            <p>Pengangguran lulusan universitas berlipat ganda antara 2020 dan 2025, mencapai 12,5%. Ketidaksesuaian ini sangat mencolok di jurusan yang terlalu jenuh seperti ilmu sosial dan humaniora, yang menyumbang 60% dari lulusan yang menganggur.</p>
+            <p>Ketika ditanya mengapa mereka merasa tidak siap untuk angkatan kerja saat ini, Milenial dan Gen Z Indonesia menyebut: Kurikulum yang ketinggalan zaman (49%), Kurangnya paparan dunia nyata atau pengalaman magang (48%), Pelatihan soft skill yang tidak memadai (46%).</p>
+        </div>
+        <div id="data-ch3-2">
+            <p>Manajemen menengah tidak lagi menjadi tujuan seperti dulu; bagi banyak orang, itu mewakili kelelahan (burnout), bukan kemajuan. 57% Milenial dan Gen Z secara aktif menghindari peran manajemen menengah.</p>
+            <p>Penyebab utama keengganan: Beban Kerja dan Tingkat Stres (57%), Gaji Vs Biaya Hidup (40%), Kurangnya Peluang Pertumbuhan (27%).</p>
+            <p>84% responden mengejar pekerjaan freelance atau sampingan, baik untuk mengekspresikan kreativitas, meningkatkan pendapatan, atau menguji jalur karier baru.</p>
+            <p>52% secara aktif mempertimbangkan untuk meninggalkan pekerjaan korporat sama sekali untuk mencari fleksibilitas dan kontrol yang lebih besar atas waktu mereka. Sementara 51% masih lebih suka pekerjaan bergaji tinggi dengan kantor fisik, 33% lebih suka mengejar pekerjaan yang bermakna dan menarik, bahkan jika bayarannya lebih rendah. 17% bersedia menerima bayaran lebih rendah untuk fleksibilitas kerja jarak jauh.</p>
+        </div>
+        <div id="data-ch3-3">
+            <p>Dari peretasan produktivitas hingga alat kreatif, AI sudah tertanam dalam cara Milenial dan Gen Z bekerja. Penggunaan paling umum: Tugas Admin (61%), Meringkas Konten (55%), Bantuan Virtual (49%).</p>
+            <p>Ada perbedaan pola pikir: 34% Milenial takut AI akan mengambil pekerjaan, sementara 43% Gen Z melihatnya sebagai pedang bermata dua—menghancurkan beberapa pekerjaan, tetapi seringkali juga menciptakan yang baru.</p>
+            <p>Kesenjangan keterampilan terbesar yang dilaporkan oleh perusahaan: Keahlian AI (45%), Rekayasa Perangkat Lunak (40%), dan Keterampilan Komunikasi, Pemecahan Masalah, dan Adaptabilitas (Soft Skills) (32%).</p>
+        </div>
+
+        <!-- Chapter 4 -->
+        <div id="data-ch4-1">
+            <p>Hiburan hari ini bukan lagi hanya kebisingan latar belakang. Bagi generasi muda Indonesia, ini adalah bagian inti dari bagaimana mereka mengekspresikan siapa mereka, apa yang mereka hargai, dan dengan siapa mereka merasa terhubung.</p>
+            <p>40% penggemar musik yang disurvei di Indonesia melaporkan bahwa artis favorit mereka memainkan peran penting dalam membentuk identitas pribadi mereka.</p>
+            <p>Hampir setengah dari Gen Z (45%) bergabung dengan forum atau grup penggemar, dibandingkan dengan 36% Milenial. 27% Gen Z secara aktif terlibat dalam tantangan yang sedang tren (vs 20% Milenial). Ini menandakan pergeseran generasi: audiens yang lebih muda tidak hanya mengonsumsi konten tetapi mengambil bagian dalam membentuknya.</p>
+            <p>Bagaimana Pemuda Indonesia Mengekspresikan Fandom Idola Mereka: Mengikuti Idola di Media Sosial (67%), Menghadiri Konser Langsung atau Acara Penggemar (45%), Memilih dalam Kompetisi atau Jajak Pendapat Idola (42%), Membeli Merchandise Resmi (38%), Membuat atau Berbagi Konten Buatan Penggemar (33%).</p>
+        </div>
+        <div id="data-ch4-2">
+            <p>Gelombang baru pembuat film Indonesia telah mengalihkan sorotan, dari tontonan ke kehalusan, menceritakan kisah-kisah yang terungkap dalam momen-momen kehidupan yang lebih tenang dan lebih rentan. Film-film seperti 'Jatuh Cinta Seperti di Film-Film' (2023) dan 'Home Sweet Loan' (2024) (1,7 juta+ penonton) menjadi contohnya.</p>
+            <p>Tema yang Paling Resonan: Perjuangan Keluarga Harian yang Dapat Dipahami (67%), Kesejahteraan Emosional dan Kehidupan Batin (45%), Mengatasi Tabu dan Realitas Sosial (42%).</p>
+            <p>Bersamaan dengan itu, 'factory horror' telah terbentuk—genre yang mengubah lanskap industri bangsa menjadi panggung ketakutan, pengorbanan, dan perjuangan kelas. Ini berakar pada teror sehari-hari kehidupan kelas pekerja: upah yang stagnan, eksploitasi tenaga kerja, jebakan utang, dan erosi perlindungan pekerja. Bagi Gen Z, ini berbicara tentang kecemasan langsung: pemberontakan simbolis terhadap ketidaksetaraan struktural dan ketidakpastian ekonomi.</p>
+        </div>
+        <div id="data-ch4-3">
+            <p>Munculnya microdrama mewakili pergeseran yang menentukan dalam lanskap hiburan digital Indonesia. Berjalan antara satu hingga lima menit per episode, mereka dirancang untuk konsumsi mobile-first.</p>
+            <p>Temuan survei menunjukkan bahwa 61% Milenial dan Gen Z di Indonesia menonton microdrama hampir setiap hari atau beberapa kali seminggu. Ini menandakan pergeseran perilaku yang jelas: microdrama bukan lagi format khusus tetapi menjadi pokok dalam diet media harian mereka.</p>
+            <p>Podcast video telah muncul sebagai media penting. 50% audiens Indonesia sekarang lebih menyukai podcast video, sementara 43% lebih suka audio. Preferensi ini didorong oleh platform visual seperti YouTube dan TikTok. Tema "From Zero to Hero" memiliki daya tarik emosional yang kuat, menawarkan cetak biru untuk ketahanan (resilience) dalam menghadapi ketidakpastian ekonomi.</p>
+        </div>
+        <div id="data-ch4-4">
+            <p>Milenial dan Gen Z Indonesia beralih ke olahraga yang dapat diakses dan berfokus pada komunitas seperti padel dan pickleball sebagai ekspresi rekreasi dan koneksi sosial. Ini bukan hanya tentang tetap aktif; mereka telah menjadi ritual sosial yang integral, menyelaraskan pencarian interaksi offline yang bermakna.</p>
+            <p>Lebih dari 60% pelancong Milenial dan Gen Z di Indonesia memprioritaskan istirahat dan pemulihan daripada tamasya dan eksplorasi. Ini telah memicu munculnya 'sleep tourism' (wisata tidur). Hotel merespons dengan tirai anti tembus cahaya, kamar kedap suara, dan ritual tidur yang dipersonalisasi.</p>
+            <p>'Regenerative tourism' (wisata regeneratif) secara aktif berupaya memulihkan ekosistem dan menghidupkan kembali ekonomi lokal. Contoh utamanya adalah Potato Head di Bali, yang mengalihkan 99,5% sampahnya dari TPA dan mengadopsi pendekatan sistem regeneratif. 73% pelancong global menyatakan mereka ingin perjalanan mereka berdampak positif pada komunitas lokal.</p>
+        </div>
+
+        <!-- Chapter 5 -->
+        <div id="data-ch5-1">
+            <p>Bagi Milenial dan Gen Z di Indonesia, kepercayaan pada institusi tidak lagi diberikan begitu saja. Itu harus diperoleh melalui tindakan, bukan warisan. Alasan utama ketidakpercayaan: Korupsi dan Penyalahgunaan Wewenang (62%), Kurangnya Transparansi dan Skandal Politik (48%), Ketidaksetaraan dalam Penegakan Hukum (48%).</p>
+            <p>Gerakan seperti #IndonesiaGelap (dipicu oleh pemotongan anggaran besar-besaran untuk layanan penting seperti BMKG dan LPSK) menjadi sorotan. 1 dari 5 (22%) pemuda Indonesia melihat protes digital sebagai respons langsung terhadap tata kelola yang gagal dan kebijakan publik. Lebih dari 60% Milenial dan Gen Z memandang gerakan online seperti #IndonesiaGelap sebagai bentuk protes yang sah. Ini bukan disengagement; ini adalah jenis engagement baru.</p>
+        </div>
+        <div id="data-ch5-2">
+            <p>Literasi politik tidak lagi dimulai dari siaran negara; itu dimulai dari cerita, slide, dan gulungan (scrolls). Platform seperti Gen Z Memilih oleh IDN Times, What Is Up Indonesia, Think Policy, dan Malaka Project mengubah politik dari sesuatu yang jauh menjadi sesuatu yang relevan dan nyata, seringkali menggunakan analogi sederhana ("Bahasa Bayi") untuk memecah kebijakan yang rumit.</p>
+            <p>Partisipasi sipil telah berkembang melampaui kotak suara. Budaya kopi yang sedang booming di Indonesia adalah contohnya. Memilih merek kopi lokal (seperti Tuku) atas rantai multinasional menjadi tindakan kecil namun kuat, sebuah bentuk penegasan identitas dan dukungan untuk ekonomi lokal.</p>
+            <p>Aktivisme juga telah pindah ke industri kreatif. FESMI (Federasi Serikat Musisi Indonesia) dan VISI (Vibrasi Suara Indonesia) didirikan untuk mengatasi masalah struktural seperti royalti yang adil, jaminan sosial (BPJamsostek) untuk musisi, dan perlindungan hukum. Bagi pemuda saat ini, kerja budaya adalah kerja sipil.</p>
+            <p>Keterlibatan dalam Aksi Sipil/Politik yang Berbeda: Voting (58% M, 63% GZ), Aktivisme Media Sosial (22% M, 31% GZ), Blogging/Ekspresi Media (25% M, 27% GZ), Partisipasi Akar Rumput (19% M, 21% GZ).</p>
+        </div>
+        
+        <!-- Chapter 6 -->
+        <div id="data-ch6-1">
+            <p>Gen Alpha (lahir 2010-2024) tidak memasuki dunia yang stabil. Mereka tumbuh di tengah-tengah disrupsi iklim, akselerasi AI, dan gejolak sosial. Ketidakpastian bukanlah di cakrawala; itu adalah titik awal.</p>
+            <p>Ini membentuk kembali cara keluarga Indonesia berpikir tentang pengasuhan. Alih-alih mempersiapkan anak-anak agar sesuai dengan dunia apa adanya, banyak yang membesarkan mereka untuk terlibat dengan dunia saat ia berubah. Refleksivitas, kesadaran emosional, dan adaptabilitas kini dipandang sebagai alat dasar.</p>
+            <p>Milenial dibesarkan untuk beradaptasi dan menyesuaikan diri. Gen Z dibesarkan untuk tampil dan membangun citra diri (self-brand). Gen Alpha sedang dibesarkan secara berbeda: untuk memproses, meregulasi diri, dan berkreasi bersama. Kecerdasan emosional adalah keterampilan inti.</p>
+            <p>Orang tua di bawah usia 40 tahun 4x lebih mungkin mencari konsultasi kesehatan mental untuk anak-anak mereka dibandingkan dengan orang tua di atas 50 tahun. Mencari dukungan bukan lagi tabu; itu adalah tanda pengasuhan proaktif berbasis nilai.</p>
+        </div>
+        <div id="data-ch6-2">
+            <p>Gen Alpha tumbuh tidak hanya di Indonesia, tetapi dengan Indonesia di peta global. Menjadi orang Indonesia bagi Gen Alpha bukan tentang nostalgia; ini tentang ekspresi, 'remix', dan kontribusi.</p>
+            <p>Sementara globalisasi mengatur panggung, kebanggaan budaya menulis naskahnya. Anak-anak ini tidak hanya menyerap konten internasional; mereka bernyanyi bersama 'Jumbo' di sekolah, menonton 'Nussa' di YouTube, dan menjelajahi cerita rakyat lokal melalui game seluler. IP lokal seperti Jumbo, Nussa, dan Kiko secara konsisten berada di peringkat lima besar program anak-anak yang paling banyak ditonton di YouTube di Indonesia.</p>
+            <p>Bagi Gen Alpha, menjadi orang Indonesia bukanlah tentang tradisi yang membeku dalam waktu; ini tentang budaya yang bergerak. Kehidupan digital mereka tidak menghapus akar mereka; mereka 'me-remix'-nya. Mereka akan tumbuh dewasa melihat budaya mereka sendiri tercermin kembali dari panggung global—bukan sebagai sesuatu yang 'niche', tetapi sebagai sesuatu yang memiliki bobot, relevansi, dan suara.</p>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+            
+            // --- DATA PROTECTION ---
+            document.addEventListener('keydown', e => {
+                if (e.ctrlKey || e.metaKey) {
+                    switch (e.key.toLowerCase()) {
+                        case 'c': case 'x': case 'v': case 'u': case 's':
+                            e.preventDefault();
+                            break;
+                    }
+                }
+                if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i')) {
+                    e.preventDefault();
+                }
+            });
+
+            // --- Theme Switcher Logic ---
+            const themeButtons = document.querySelectorAll('.theme-btn');
+            const htmlEl = document.documentElement;
+
+            const updateActiveButton = (theme) => {
+                themeButtons.forEach(btn => {
+                    btn.classList.remove('accent-bg', 'text-white');
+                    btn.style.color = 'var(--text-secondary-color)';
+                    
+                    if (btn.dataset.theme === theme) {
+                         btn.classList.add('accent-bg', 'text-white');
+                         btn.style.color = 'white';
+                    }
+                });
+            };
+            
+            const applyTheme = (theme) => {
+                htmlEl.setAttribute('data-theme', theme);
+            };
+
+            const setTheme = (theme) => {
+                localStorage.setItem('theme', theme);
+                updateActiveButton(theme);
+                applyTheme(theme);
+            }
+            
+            themeButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    setTheme(button.dataset.theme);
+                });
+            });
+
+            // const savedTheme = localStorage.getItem('theme') || 'cahaya';
+            // setTheme(savedTheme);
+            
+            // Logika baru untuk memastikan tema default adalah 'cahaya' atau 'gelap'
+            let savedTheme = localStorage.getItem('theme');
+            if (savedTheme !== 'cahaya' && savedTheme !== 'gelap') {
+                savedTheme = 'cahaya';
+            }
+            setTheme(savedTheme);
+
+            // --- Mobile Menu Logic ---
+            const menuToggleBtn = document.getElementById('menu-toggle-btn');
+            const menuCloseBtn = document.getElementById('menu-close-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+            const openMenu = () => mobileMenu.classList.add('open');
+            const closeMenu = () => mobileMenu.classList.remove('open');
+
+            menuToggleBtn.addEventListener('click', openMenu);
+            menuCloseBtn.addEventListener('click', closeMenu);
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', closeMenu);
+            });
+
+            // --- Collapsible Sidebar Logic ---
+            const collapseBtn = document.getElementById('collapse-btn');
+            const sidebar = document.getElementById('sidebar');
+
+            function setSidebarState(collapsed) {
+                if (collapsed) {
+                    sidebar.classList.add('lg:w-20');
+                    sidebar.classList.remove('lg:w-64');
+                    sidebar.classList.add('collapsed');
+                } else {
+                    sidebar.classList.remove('lg:w-20');
+                    sidebar.classList.add('lg:w-64');
+                    sidebar.classList.remove('collapsed');
+                }
+            }
+
+            if (collapseBtn && sidebar) {
+                collapseBtn.addEventListener('click', () => {
+                    const isCollapsed = sidebar.classList.contains('collapsed');
+                    setSidebarState(!isCollapsed);
+                    localStorage.setItem('sidebarCollapsed', !isCollapsed);
+                });
+                const savedState = localStorage.getItem('sidebarCollapsed') === 'true';
+                setSidebarState(savedState);
+            }
+            
+            // --- Scrollspy for Navigation ---
+            const sections = document.querySelectorAll('section');
+            const allNavLinks = document.querySelectorAll('.nav-link');
+            
+            const activateLink = (id) => {
+                allNavLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${id}`) {
+                        link.classList.add('active');
+                    }
+                });
+            };
+
+            const scrollSpyObserver = new IntersectionObserver((entries) => {
+                let currentBest = null;
+                entries.forEach(entry => {
+                    const isAboveHalf = entry.boundingClientRect.top < window.innerHeight / 2;
+                    const isBelowHalf = entry.boundingClientRect.bottom > window.innerHeight / 2;
+                    if (entry.isIntersecting && isAboveHalf && isBelowHalf) {
+                        currentBest = entry;
+                    }
+                });
+                
+                if (!currentBest) {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            if (!currentBest || entry.intersectionRatio > currentBest.intersectionRatio) {
+                                currentBest = entry;
+                            }
+                        }
+                    });
+                }
+
+                if (currentBest) {
+                    activateLink(currentBest.target.id);
+                } else if (window.scrollY < 200) {
+                    activateLink('hero');
+                }
+
+            }, { rootMargin: '0px 0px -50% 0px', threshold: 0 });
+            
+            sections.forEach(section => scrollSpyObserver.observe(section));
+            
+            const heroSection = document.getElementById('hero');
+            if (heroSection) {
+                 new IntersectionObserver((entries) => {
+                    if (entries[0].isIntersecting && window.scrollY < 200) {
+                        activateLink('hero');
+                    }
+                }, { threshold: 0.1 }).observe(heroSection);
+            }
+
+            // --- Modal Logic ---
+            const modalContainer = document.getElementById('modal-container');
+            const modalTitleEl = document.getElementById('modal-title');
+            const modalBodyEl = document.getElementById('modal-body');
+            const openButtons = document.querySelectorAll('.modal-open-btn');
+            const closeTriggers = document.querySelectorAll('.modal-close-trigger');
+
+            openButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const dataId = button.dataset.modalId;
+                    const dataTitle = button.dataset.modalTitle;
+                    const contentEl = document.getElementById(dataId);
+
+                    if (contentEl) {
+                        modalTitleEl.textContent = dataTitle;
+                        modalBodyEl.innerHTML = contentEl.innerHTML;
+                        modalContainer.classList.remove('hidden');
+                        document.body.style.overflow = 'hidden';
+                        modalBodyEl.scrollTop = 0; 
+                    }
+                });
+            });
+
+            const closeModal = () => {
+                modalContainer.classList.add('hidden');
+                document.body.style.overflow = '';
+            };
+
+            closeTriggers.forEach(trigger => {
+                trigger.addEventListener('click', closeModal);
+            });
+
+            // --- BARU: Animation on Scroll (Staggered Cards) ---
+            const animationObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible'); // Buat section terlihat
+                        
+                        // Temukan kartu di dalam section ini dan animasikan secara bertahap
+                        const cards = entry.target.querySelectorAll('.deep-card');
+                        cards.forEach((card, index) => {
+                            card.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
+                            // Tambahkan delay berdasarkan index
+                            card.style.transitionDelay = `${100 + index * 120}ms`; // 100ms base delay + 120ms per kartu
+                            card.classList.add('visible');
+                        });
+
+                        animationObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('.fade-in-up').forEach((el) => {
+                animationObserver.observe(el);
+            });
+
+            // --- BARU: Hero Parallax Effect ---
+            const heroImg = document.getElementById('hero-image');
+            if (heroImg) {
+                window.addEventListener('scroll', () => {
+                    const scrollY = window.scrollY;
+                    if (scrollY < 600) { // Hanya terapkan efek saat hero masih terlihat
+                        // Gerakkan gambar ke bawah (Y) lebih lambat dari scroll
+                        heroImg.style.transform = `translateY(${scrollY * 0.3}px) scale(1.1)`; // Sedikit zoom untuk pastikan tidak ada tepi
+                        heroImg.style.willChange = 'transform';
+                    }
+                }, { passive: true }); // Optimasi performa scroll
+            }
+        });
+    </script>
+
+</body>
+</html>
